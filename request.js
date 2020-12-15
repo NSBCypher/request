@@ -1024,7 +1024,10 @@ Request.prototype.onRequestResponse = function (response) {
         finishFlush: zlib.Z_SYNC_FLUSH
       }
 
-      if (contentEncoding === 'gzip') {
+      if (contentEncoding === 'br') {
+        responseContent = zlib.createBrotliDecompress()
+        response.pipe(responseContent)
+      } else if (contentEncoding === 'gzip') {
         responseContent = zlib.createGunzip(zlibOptions)
         response.pipe(responseContent)
       } else if (contentEncoding === 'deflate') {
