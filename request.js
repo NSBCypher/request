@@ -748,6 +748,7 @@ Request.prototype.start = function () {
   delete reqOptions.timeout
 
   try {
+    reqOptions.insecureHTTPParser = true;
     self.req = self.httpModule.request(reqOptions)
   } catch (err) {
     self.emit('error', err)
